@@ -1,5 +1,5 @@
 from custom_datasets import get_xor_dataloaders, get_disease_dataloaders, get_glass_dataloaders, get_letter_dataloaders
-from architectures import DiseaseModel
+from architectures import SimpleModel
 from torch import optim
 from torch import nn
 
@@ -19,7 +19,13 @@ def get_dataloaders(dataset_name):
 
 def get_model(model_name):
     if model_name == "Disease":
-        return DiseaseModel()
+        return SimpleModel(input_length=10, output_length=6)
+    elif model_name == "XOR":
+        return SimpleModel(input_length=2, output_length=2)
+    elif model_name == "Glass":
+        return SimpleModel(input_length=9, output_length=7)
+    elif model_name == "Letter":
+        return SimpleModel(input_length=16, output_length=26)
     else:
         raise Exception("Choose one of the following models:\nDisease\nXOR\nGlass\nLetter")
 
